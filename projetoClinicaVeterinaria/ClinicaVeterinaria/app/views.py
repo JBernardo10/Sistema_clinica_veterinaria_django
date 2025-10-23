@@ -186,7 +186,7 @@ def excluirServico(request, id):
 def pagamento(request):
     pagamentos = Pagamento.objects.all().order_by('-id')
     pc = request.GET.get('pc', 1)
-    listaPagamentos = Paginator(pagamentos, 5).get_page(pc)
+    listaPagamentos = Paginator(pagamentos, 3).get_page(pc)
 
     formulario = CadastroPagamento_MF(request.POST or None)
 

@@ -40,6 +40,53 @@ Veterinario
         </tbody>
     </table>
 
+    <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+    {%if veterinarios.number == 1%}
+    {# Primeira / Anterior #}
+      <li class="page-item disabled">
+        <a class="page-link" href="#">&laquo; Primeira &#40 {{veterinarios.number}} &#41 </a>
+      </li>
+      <li class="page-item disabled">
+        <a class="page-link" href="#">Anterior</a>
+      </li>
+      {% else %}
+        {# Primeira / Anterior #}
+         <li class="page-item">
+        <a class="page-link" href="{% url 'veterinario' %}?pc=1">&laquo; Primeira &#40 1 &#41 </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{% url 'veterinario' %}?pc={{veterinarios.previous_page_number}}">Anterior &#40 {{veterinarios.previous_page_number}} &#41</a>
+      </li>
+
+      {% endif %}
+
+
+    {# página atual (apenas exibindo o número, igual ao seu exemplo) #}
+      <li class="page-item disabled">
+        <a class="page-link" href="">{{veterinarios.number}}</a>
+      </li>
+
+      {%if veterinarios.paginator.num_pages == veterinarios.number%}
+    {# Próxima / Última #}
+      <li class="page-item disabled">
+        <a class="page-link" href="#">Próxima </a>
+      </li>
+      <li class="page-item disabled">
+        <a class="page-link" href="#">Última &#40 {{veterinarios.paginator.num_pages}} &#41&raquo;</a>
+      </li>
+    {%else%}
+     <li class="page-item">
+        <a class="page-link" href="{% url 'veterinario' %}?pc={{veterinarios.next_page_number}}">Próxima &#40 {{ veterinarios.next_page_number}}&#41</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{%url 'veterinario'%}?pc={{veterinarios.paginator.num_pages}}">Última &#40 {{veterinarios.paginator.num_pages}} &#41 &raquo;</a>
+      </li>
+
+      {%endif%}
+    </ul>
+    </nav>
+
     <hr>
 
     <h1>cadastro de veterinario</h1>
