@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block estiloCss%}
+<link rel="stylesheet" href="{%static 'css/padrao.css'%}">
+{%endblock%}
+
+{%block titulo%}
+excluir Pedido
+{%endblock%}
+
+{%block conteudo%}
+
+<div class="cont">
+    <h1><strong>EXCLUIR PEDIDO</strong></h1>
+    
+    <p>Deseja excluir o Pedido n° {{pedido.id}}</p>
+    <hr>
+    <div>
+        <p><strong>Cliente:</strong> {{ pedido.idCliente }}</p>
+        <p><strong>Veterinário:</strong> {{ pedido.idVeterinario }}</p>
+        <p><strong>Pet:</strong> {{ pedido.idPet }}</p>
+        <p><strong>Anexos:</strong> {% if pedido.anexos %}Sim{% else %}Não{% endif %}</p>
+        <p><strong>Data do Pedido:</strong> {{ pedido.dataPedido|date:"d/m/Y H:i" }}</p>
+        <p><strong>Valor Total:</strong> R$ {{ pedido.valorTotal|floatformat:2 }}</p>
+    </div>
+      <hr>
+    <form method="POST">
+        {% csrf_token %}
+        <Button type="submit">Confimar Exclusão</Button>
+        <a class="btnA" href="{%url 'pedido'%}"> Cancelar</a>
+    </form>
+</div>
+
+{%endblock%}

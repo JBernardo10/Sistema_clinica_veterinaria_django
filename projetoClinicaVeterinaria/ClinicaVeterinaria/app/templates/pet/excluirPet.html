@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block estiloCss %}
+<link rel="stylesheet" href="{% static 'css/padrao.css' %}">
+{% endblock %}
+
+{% block titulo %} 
+Excluir Pet
+{% endblock %}
+
+{% block conteudo %}
+<div class="cont">
+    <h1><strong>EXCLUIR PET</strong></h1>
+    
+    <p>Deseja excluir o pet <strong>{{ pet.nome }}</strong>?</p>
+    <div>
+        <p><strong>ID:</strong> {{ pet.id }}</p>
+        <p><strong>NOME:</strong> {{ pet.nome }}</p>
+        <p><strong>TIPO:</strong> {{ pet.tipo }}</p>
+        <p><strong>RAÇA:</strong> {{ pet.raca }}</p>
+        <p><strong>DATA DE NASCIMENTO:</strong> {{ pet.dataNascimento|date:"d/m/Y" }}</p>
+        <p><strong>SEXO:</strong> {{ pet.sexo }}</p>
+        <p><strong>DONO:</strong> {{ pet.idDono.nome }}</p>
+        <p><strong>Pet</strong></p>
+        {% if pet.imagemPet %}
+            <img src="{{ pet.imagemPet.url }}" alt="Imagem do pet" width="150px" height="150px">
+        {% else %}
+            <p>Nenhuma imagem cadastrada.</p>
+        {% endif %}
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Confirmar Exclusão</button>
+        <a class="btnA" href="{% url 'pet' %}">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

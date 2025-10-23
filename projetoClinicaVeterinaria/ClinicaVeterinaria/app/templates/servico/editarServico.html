@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block estiloCss %}
+<link rel="stylesheet" href="{% static 'css/padrao.css' %}">
+{% endblock %}
+
+{% block titulo %} 
+Editar Serviço
+{% endblock %}
+
+{% block conteudo %}
+<div class="cont">
+    <h1>EDITAR SERVIÇO</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label>TIPO</label>
+            {{ formulario.tipo }}
+        </div>
+        <div>
+            <label>DESCRIÇÃO</label>
+            {{ formulario.descricao }}
+        </div>
+        <div>
+            <label>VALOR</label>
+            {{ formulario.valor }}
+        </div>
+
+        <button type="submit">SALVAR</button>
+    </form>
+</div>
+{% endblock %}

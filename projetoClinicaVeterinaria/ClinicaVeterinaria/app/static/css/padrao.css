@@ -1,0 +1,167 @@
+/* clinica.css */
+h1 {
+  font-size: 22px;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+thead tr {
+  background-color: #3498db;
+  color: white;
+}
+
+thead tr th {
+  padding: 10px;
+  text-align: left;
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+  background-color: #f0f8ff;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+form button {
+  background-color: #2ecc71;
+  color:  #fff;
+  border: none;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  height: 50px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+form button:hover {
+  background-color: #27ae60;
+  transform: translateY(-2px);
+}
+
+hr {
+  margin: 40px 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+.btnA {
+  background-color: #2e43cc;
+  color:  #fff;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  height: 50px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.btnA:hover {
+  background-color: #2e95cc;
+  transform: translateY(-2px);
+}
+
+form p {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+form input, form select, form textarea {
+  padding: 10px 12px;
+  border: 1px solid  #e0e4e8;
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+form input:focus, form select:focus, form textarea:focus {
+  border-color: #2980b9;
+  box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.15);
+}
+
+hr {
+  border: none;
+  border-top: 2px dashed #e0e4e8;
+  margin: 40px 0;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding-left: 0;
+  margin: 30px 0;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.page-item {
+  display: inline-block;
+}
+
+.page-link {
+  display: block;
+  color: #2e43cc;
+  background-color: #ffffff;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.page-link:hover {
+  background-color: #2e43cc;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Página atual (desabilitada ou marcada) */
+.page-item.disabled .page-link {
+  color: #999;
+  background-color: #f4f4f4;
+  border-color: #ddd;
+  cursor: not-allowed;
+  box-shadow: none;
+}

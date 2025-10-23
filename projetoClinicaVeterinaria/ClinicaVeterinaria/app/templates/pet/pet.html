@@ -1,0 +1,114 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block estiloCss%}
+<link rel="stylesheet" href="{%static 'css/padrao.css'%}">
+{%endblock%}
+{%block titulo%}
+Pets
+{%endblock%}
+
+{%block conteudo%}
+<div>
+    <h1>Pets cadastradas</h1>
+    <table>
+        <thead>
+            <tr>
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>raça</th>
+            <th>Data de Nascimento</th>
+            <th>Sexo</th>
+            <th>Dono</th>
+            <th>Imagem</th>
+            <th>AÇÕES</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {%for pet in pets%}
+            <tr>
+            <td>{{ pet.nome }}</td>
+            <td>{{ pet.tipo }}</td>
+            <td>{{ pet.raca }}</td>
+            <td>{{ pet.dataNascimento }}</td>
+            <td>{{ pet.sexo }}</td>
+            <td>{{ pet.idDono }}</td>
+            <td>
+              {% if pet.imagemPet%}
+                <img src="{{pet.imagemPet.url}}" alt="" width="150px" height="150px">
+              {%else%}
+                <span>Sem imagem cadastrada</span>
+              {%endif%}
+            </td>
+            <td id="link">
+                <a class="btnA" href="{%url 'editarPet' pet.id %}">EDITAR</a>
+                <a class="btnA" href="{% url 'excluirPet' pet.id%}">EXCLUIR</a>
+            </td>
+        </tr>
+            {%empty%}
+            <tr colspan = "4">Nenhum Pet Cadastrado no sistema</tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+
+    <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+    {%if pets.number == 1%}
+    {# Primeira / Anterior #}
+      <li class="page-item disabled">
+        <a class="page-link" href="#">&laquo; Primeira &#40 {{pets.number}} &#41 </a>
+      </li>
+      <li class="page-item disabled">
+        <a class="page-link" href="#">Anterior</a>
+      </li>
+      {% else %}
+        {# Primeira / Anterior #}
+         <li class="page-item">
+        <a class="page-link" href="{% url 'pet' %}?pc=1">&laquo; Primeira &#40 1 &#41 </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{% url 'pet' %}?pc={{pets.previous_page_number}}">Anterior &#40 {{pets.previous_page_number}} &#41</a>
+      </li>
+
+      {% endif %}
+
+
+    {# página atual (apenas exibindo o número, igual ao seu exemplo) #}
+      <li class="page-item disabled">
+        <a class="page-link" href="">{{pets.number}}</a>
+      </li>
+
+      {%if pets.paginator.num_pages == pets.number%}
+    {# Próxima / Última #}
+      <li class="page-item disabled">
+        <a class="page-link" href="#">Próxima </a>
+      </li>
+      <li class="page-item disabled">
+        <a class="page-link" href="#">Última &#40 {{pets.paginator.num_pages}} &#41&raquo;</a>
+      </li>
+    {%else%}
+     <li class="page-item">
+        <a class="page-link" href="{% url 'pet' %}?pc={{pets.next_page_number}}">Próxima &#40 {{ pets.next_page_number}}&#41</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{%url 'pet'%}?pc={{pets.paginator.num_pages}}">Última &#40 {{pets.paginator.num_pages}} &#41 &raquo;</a>
+      </li>
+
+      {%endif%}
+    </ul>
+    </nav>
+
+    <hr>
+
+    <h1>cadastro de Pet</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{formulario.as_p}} 
+        <button type="submit">SALVAR</button>
+    </form>
+
+
+</div>
+{% endblock %}

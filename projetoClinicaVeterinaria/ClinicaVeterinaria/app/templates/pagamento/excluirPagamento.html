@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block estiloCss%}
+<link rel="stylesheet" href="{%static 'css/padrao.css'%}">
+{%endblock%}
+
+{%block titulo%} 
+Excluir Pagamento
+{%endblock%}
+
+{% block conteudo %}
+<div class="cont">
+    <h1><strong>EXCLUIR PAGAMENTO</strong></h1>
+    
+    <p>Deseja excluir o pagamento de <strong>R$ {{ pagamento.valor }}</strong>?</p>
+    <div>
+        <p><strong>ID:</strong> {{ pagamento.id }}</p>
+        <p><strong>VALOR:</strong> R$ {{ pagamento.valor }}</p>
+        <p><strong>FORMA DE PAGAMENTO:</strong> {{ pagamento.formaPagamento }}</p>
+        <p><strong>PEDIDO:</strong> {{ pagamento.idPedido.id }}</p>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Confirmar Exclusão</button>
+        <a class="btnA" href="{% url 'pagamento' %}">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{%block estiloCss%}
+<link rel="stylesheet" href="{%static 'css/padrao.css'%}">
+{%endblock%}
+
+{%block titulo%} 
+Editar Pagamento
+{%endblock%}
+
+{% block conteudo %}
+<div class="cont">
+    <h1>Editar Pagamento</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label>VALOR</label>
+            {{ formulario.valor }}
+        </div>
+        <div>
+            <label>FORMA DE PAGAMENTO</label>
+            {{ formulario.formaPagamento }}
+        </div>
+        <div>
+            <label>PEDIDO</label>
+            {{ formulario.idPedido }}
+        </div>
+        <button type="submit">SALVAR</button>
+    </form>
+</div>
+{% endblock %}

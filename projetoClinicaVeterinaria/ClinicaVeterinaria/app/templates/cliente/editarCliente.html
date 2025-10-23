@@ -1,0 +1,46 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block estiloCss%}
+<link rel="stylesheet" href="{%static 'css/padrao.css'%}">
+{%endblock%}
+
+{%block titulo%} 
+Editar Cliente
+{%endblock%}
+
+{%block conteudo%}
+<div class="cont">
+    <h1>EDITAR CLIENTE</h1>
+
+     <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label>NOME</label>
+            {{formulario.nome}}
+        </div>
+
+        <div>
+            <label>TELEFONE</label>
+            {{formulario.telefone}}
+        </div>
+
+        <div>
+            <label >EMAIL</label>
+            {{formulario.email}}
+        </div>
+
+        <div>
+            <label>ENDEREÇO</label>
+            {{formulario.endereco}}
+        </div>
+         <div>
+            <label>CLINICA</label>
+            {{formulario.idClinica}}
+        </div>
+        <button type="submit">SALVAR</button>
+    </form>
+</div>
+
+
+{%endblock%}

@@ -1,0 +1,57 @@
+{%extends 'base.html'%}
+{% load static%}
+
+{%block estiloCss%}
+<link rel="stylesheet" href="{% static 'css/inicio.css'%}">
+{%endblock%}
+{%block titulo%}
+Inicio
+{%endblock%}
+
+{% block conteudo %}
+<div>
+  <h1 class="h1Ini">Sistema de Gerenciamento de Clínicas Veterinárias</h1 >
+    <div>
+  <h2 class="h2Ini">Onde cuidado encontra tecnologia 🐶🐱</h2>
+  <p>
+    Em cada consulta, em cada carinho, existe uma história. E por trás de cada história, há uma clínica que precisa de organização, agilidade e tempo para focar no que importa: o bem-estar dos animais.
+  </p>
+  <p>
+    Este sistema não é só uma ferramenta. É um aliado silencioso que trabalha nos bastidores, conectando clientes, pets, veterinários e serviços em uma sinfonia de eficiência.
+  </p>
+  <p>
+    Porque quando tudo funciona, o cuidado flui. E quando o cuidado flui, vidas são transformadas.
+  </p>
+  <p><em>Bem-vindo ao futuro da gestão veterinária. Simples, humano e inteligente.</em></p>
+</div>
+  <p>
+    Este sistema foi desenvolvido para facilitar o gerenciamento completo de clínicas veterinárias. Ele organiza e conecta informações essenciais como:
+  </p>
+  <ul id="classes">
+    <li class="itens"><strong>Clínicas</strong>: Cadastro de dados institucionais como nome, CNPJ, endereço e telefone.</li>
+    <li class="itens"><strong>Clientes</strong>: Registro de tutores dos animais, com dados de contato e vínculo com a clínica.</li>
+    <li class="itens"><strong>Pets</strong>: Informações detalhadas dos animais atendidos, como espécie, raça, data de nascimento e sexo.</li>
+    <li class="itens"><strong>Veterinários</strong>: Profissionais vinculados à clínica, com especialidade e contato.</li>
+    <li class="itens"><strong>Serviços</strong>: Catálogo de procedimentos oferecidos, com descrição, preço e responsável.</li>
+    <li class="itens"><strong>Pedidos</strong>: Histórico de atendimentos realizados, incluindo cliente, pet, serviços e pagamento.</li>
+    <li class="itens"><strong>Pagamentos</strong>: Controle das formas de pagamento e valores recebidos.</li>
+    <li class="itens"><strong>Itens de Serviço</strong>: Detalhamento dos serviços prestados em cada pedido.</li>
+    <li class="itens"><strong>Anexos</strong>: Documentos ou informações adicionais relacionadas aos serviços.</li>
+  </ul>
+  <p>
+    Com este sistema, é possível manter um controle eficiente e integrado de todas as operações da clínica, garantindo agilidade no atendimento, organização dos dados e melhor experiência para os clientes e seus pets.
+  </p>
+</div>
+
+<article>
+  <h2 class="h2Ini">Como cuidar da saúde do seu pet</h2>
+  <p>Manter vacinas em dia e fazer check-ups regulares é essencial...</p>
+
+  <aside>
+    <h3 class="h3Ini">Dica extra 🐾</h3>
+    <p>Leve seu pet para passear ao menos duas vezes por dia. Isso ajuda na saúde física e emocional!</p>
+  </aside>
+</article>
+
+
+{% endblock %}

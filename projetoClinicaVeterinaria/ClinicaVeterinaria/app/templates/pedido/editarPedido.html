@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block estiloCss %}
+<link rel="stylesheet" href="{% static 'css/padrao.css' %}">
+{% endblock %}
+
+{% block titulo %} 
+Editar Pedido
+{% endblock %}
+
+{% block conteudo %}
+<div class="cont">
+    <h1>EDITAR PEDIDO</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div><p>Edição do Pedido nº {{ pedido.id }}</p></div>
+
+        <div>
+            <label>CLIENTE</label>
+            {{ formulario.idCliente }}
+        </div>
+
+        <div>
+            <label>VETERINÁRIO</label>
+            {{ formulario.idVeterinario }}
+        </div>
+
+        <div>
+            <label>PET</label>
+            {{ formulario.idPet }}
+        </div>
+
+        <div>
+            <label>ANEXOS?</label>
+            {{ formulario.anexos }}
+        </div>
+
+        <div>
+            <label>VALOR TOTAL</label>
+            {{ formulario.valorTotal }}
+        </div>
+
+        <div>
+            <label>DATA DO PEDIDO</label>
+            <p>{{ pedido.dataPedido|date:"d/m/Y H:i" }}</p>
+        </div>
+
+        <button type="submit">SALVAR</button>
+    </form>
+</div>
+{% endblock %}

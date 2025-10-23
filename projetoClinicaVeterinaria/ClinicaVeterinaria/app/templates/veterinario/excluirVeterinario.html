@@ -1,0 +1,31 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block estiloCss%}
+<link rel="stylesheet" href="{%static 'css/padrao.css'%}">
+{%endblock%}
+
+{%block titulo%}
+excluir Veterinario
+{%endblock%}
+
+{%block conteudo%}
+
+<div class="cont">
+    <h1><strong>EXCLUIR VETERINARIO</strong></h1>
+    
+    <p>Deseja excluir O Veterinario <strong>{{veterinario.nome}}</strong></p>
+    <div>
+        <p>NOME: {{veterinario.nome}}</p>
+        <p>ESPECIALIDADE: {{veterinario.especialidade}}</p>
+        <P>TELEFONE: {{veterinario.telefone}}</P>
+        <p>CLINICA DE CADASTRO: {{veterinario.idClinica}}</p>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <Button type="submit">Confimar Exclusão</Button>
+        <a class="btnA" href="{%url 'veterinario'%}"> Cancelar</a>
+    </form>
+</div>
+
+{%endblock%}

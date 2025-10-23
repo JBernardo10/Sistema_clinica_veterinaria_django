@@ -1,0 +1,52 @@
+{%extends 'base.html'%}
+{%load static %}
+
+{%block estiloCss%}
+<link rel="stylesheet" href="{%static 'css/padrao.css'%}">
+{%endblock%}
+{%block titulo%}
+Veterinario
+{%endblock%}
+
+{%block conteudo%}
+<div>
+    <h1>Veterinarios cadastrados</h1>
+    <table>
+        <thead>
+            <tr>
+            <th>Nome</th>
+            <th>Especialidade</th>
+            <th>Telefone</th>
+            <th>Clinica</th>
+            <th>ações</th>
+           
+        </thead>
+
+        <tbody>
+            {%for veterinario in veterinarios%}
+            <tr>
+            <td>{{ veterinario.nome }}</td>
+            <td>{{ veterinario.especialidade }}</td>
+            <td>{{ veterinario.telefone }}</td>
+             <td>{{ veterinario.idClinica }}</td>
+            <td>
+                <a class="btnA" href="{% url 'editarVeterinario' veterinario.id %}">EDITAR</a>
+                <a class="btnA" href="{% url 'excluirVeterinario' veterinario.id %}">EXCLUIR</a>
+            </td>
+        </tr>
+            {%empty%}
+            <tr colspan = "4">Nenhum veterinario cadastrado no sistema</tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+    <hr>
+
+    <h1>cadastro de veterinario</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{formulario.as_p}}
+        <button type="submit">SALVAR</button>
+    </form>
+</div>
+{% endblock %}

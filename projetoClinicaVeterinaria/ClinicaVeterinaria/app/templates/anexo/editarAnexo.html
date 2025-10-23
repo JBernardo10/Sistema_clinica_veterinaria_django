@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block estiloCss %}
+<link rel="stylesheet" href="{% static 'css/padrao.css' %}">
+{% endblock %}
+
+{% block titulo %}
+Editar Anexo
+{% endblock %}
+
+{% block conteudo %}
+<div class="cont">
+    <h1>EDITAR ANEXO</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <p>Edição do Anexo nº {{ anexo.id }}</p>
+
+        <div>
+            <label>DURAÇÃO</label>
+            {{ formulario.duracao }}
+        </div>
+
+        <div>
+            <label>INFORMAÇÕES</label>
+            {{ formulario.informacoes }}
+        </div>
+
+        <div>
+            <label>SERVIÇO</label>
+            {{ formulario.idServico }}
+        </div>
+
+        <button type="submit">SALVAR</button>
+    </form>
+</div>
+{% endblock %}

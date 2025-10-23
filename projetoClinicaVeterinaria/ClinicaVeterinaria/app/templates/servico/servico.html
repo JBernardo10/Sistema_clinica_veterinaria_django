@@ -1,0 +1,104 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block estiloCss%}
+<link rel="stylesheet" href="{%static 'css/padrao.css'%}">
+{%endblock%}
+{%block titulo%}
+Servico
+{%endblock%}
+
+{%block conteudo%}
+<div>
+        <h1>Serviços cadastrados</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for servico in servicos %}
+                <tr>
+                    <td>{{ servico.id }}</td>
+                    <td>{{ servico.tipo }}</td>
+                    <td>{{ servico.descricao }}</td>
+                    <td>{{ servico.valor }}</td>
+                    <td id="link">
+                        <a class="btnA" href="{% url 'editarServico' servico.id %}">EDITAR</a>
+                        <a class="btnA" href="{% url 'excluirServico' servico.id %}">EXCLUIR</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7">Nenhum serviço cadastrado no sistema</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+    {%if servicos.number == 1%}
+    {# Primeira / Anterior #}
+      <li class="page-item disabled">
+        <a class="page-link" href="#">&laquo; Primeira &#40 {{servicos.number}} &#41 </a>
+      </li>
+      <li class="page-item disabled">
+        <a class="page-link" href="#">Anterior</a>
+      </li>
+      {% else %}
+        {# Primeira / Anterior #}
+         <li class="page-item">
+        <a class="page-link" href="{% url 'servico' %}?pc=1">&laquo; Primeira &#40 1 &#41 </a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{% url 'servico' %}?pc={{servicos.previous_page_number}}">Anterior &#40 {{servicos.previous_page_number}} &#41</a>
+      </li>
+
+      {% endif %}
+
+
+    {# página atual (apenas exibindo o número, igual ao seu exemplo) #}
+      <li class="page-item disabled">
+        <a class="page-link" href="">{{servicos.number}}</a>
+      </li>
+
+      {%if servicos.paginator.num_pages == servicos.number%}
+    {# Próxima / Última #}
+      <li class="page-item disabled">
+        <a class="page-link" href="#">Próxima </a>
+      </li>
+      <li class="page-item disabled">
+        <a class="page-link" href="#">Última &#40 {{servicos.paginator.num_pages}} &#41&raquo;</a>
+      </li>
+    {%else%}
+     <li class="page-item">
+        <a class="page-link" href="{% url 'servico' %}?pc={{servicos.next_page_number}}">Próxima &#40 {{ servicos.next_page_number}}&#41</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="{%url 'servico'%}?pc={{servicos.paginator.num_pages}}">Última &#40 {{servicos.paginator.num_pages}} &#41 &raquo;</a>
+      </li>
+
+      {%endif%}
+    </ul>
+    </nav>
+
+    <hr>
+
+    <h1>cadastro de Serviço</h1>
+     <form method="POST">
+        {% csrf_token %}
+        {{formulario.as_p}}
+        <button type="submit">SALVAR</button>
+    </form>
+
+ 
+
+</div>
+{% endblock %}

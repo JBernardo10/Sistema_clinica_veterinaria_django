@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block estiloCss%}
+<link rel="stylesheet" href="{%static 'css/padrao.css'%}">
+{%endblock%}
+
+{%block titulo%}
+excluir Cliente
+{%endblock%}
+
+{%block conteudo%}
+
+<div class="cont">
+    <h1><strong>EXCLUIR CLIENTE</strong></h1>
+    
+    <p>Deseja excluir a CLIENTE <strong>{{cliente.nome}}</strong></p>
+    <div>
+        <p>NOME: {{cliente.nome}}</p>
+        <p>TELEFONE: {{cliente.telefone}}</p>
+        <P>EMAIL: {{cliente.email}}</P>
+        <p>ENDEREÇO: {{cliente.endereco}}</p>
+        <p>CLINICA DE CADASTRO: {{cliente.idClinica}}</p>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <Button type="submit">Confimar Exclusão</Button>
+        <a class="btnA" href="{%url 'cliente'%}"> Cancelar</a>
+    </form>
+</div>
+
+{%endblock%}

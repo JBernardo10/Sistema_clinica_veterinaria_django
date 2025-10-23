@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load l10n %}
+
+{% block estiloCss %}
+<link rel="stylesheet" href="{% static 'css/padrao.css' %}">
+{% endblock %}
+
+{% block titulo %}
+Itens de Serviço
+{% endblock %}
+
+{% block conteudo %}
+<div>
+    <h1>Itens de Serviço Cadastrados</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Quantidade</th>
+                <th>SubTotal</th>
+                <th>Serviço</th>
+                <th>Pedido</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in itens %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.qtd }}</td>
+                <td>R$ {{ item.subTotal }}</td>
+                <td>{{ item.idServico }}</td>
+                <td>{{ item.idPedido }}</td>
+                <td id="link">
+                    <a class="btnA" href="{% url 'editarItemServico' item.id %}">EDITAR</a>
+                    <a class="btnA" href="{% url 'excluirItemServico' item.id %}">EXCLUIR</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">Nenhum item de serviço cadastrado no sistema</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+        <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if itens.number == 1 %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">&laquo; Primeira</a>
+            </li>
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Anterior</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="{% url 'itemServico' %}?pc=1">&laquo; Primeira</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="{% url 'itemServico' %}?pc={{ itens.previous_page_number }}">Anterior</a>
+            </li>
+            {% endif %}
+
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Página {{ itens.number }}</a>
+            </li>
+
+            {% if itens.paginator.num_pages == itens.number %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Próxima</a>
+            </li>
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Última &raquo;</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="{% url 'itemServico' %}?pc={{ itens.next_page_number }}">Próxima</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="{% url 'itemServico' %}?pc={{ itens.paginator.num_pages }}">Última &raquo;</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <hr>
+
+    <h1>Cadastrar Item de Serviço</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label>Quantidade</label>
+            {{ formulario.qtd }}
+        </div>
+
+        <div>
+            <label>SubTotal</label>
+            {{ formulario.subTotal }}
+        </div>
+
+        <!-- 🚀 Campo manual de serviço COM preços -->
+        <div>
+            <label>Serviço</label>
+            <select name="idServico" id="id_idServico" class="formulario" required>
+                <option value="">Selecione...</option>
+                {% for servico in servicos %}
+                    <option value="{{ servico.id }}" data-preco="{{ servico.valor|unlocalize }}">
+                        {{ servico.nome }} - R$ {{ servico.valor }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label>Pedido</label>
+            {{ formulario.idPedido }}
+        </div>
+
+        <button type="submit">SALVAR</button>
+    </form>
+
+    <!-- SCRIPT DE CÁLCULO -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const servicoSelect = document.getElementById("id_idServico");
+        const qtdInput = document.getElementById("id_qtd");
+        const subtotalInput = document.getElementById("id_subTotal");
+
+        function atualizarSubtotal() {
+            const option = servicoSelect.options[servicoSelect.selectedIndex];
+            const preco = parseFloat(option?.dataset?.preco) || 0;
+            const qtd = parseInt(qtdInput.value) || 0;
+            subtotalInput.value = (preco * qtd).toFixed(2);
+        }
+
+        servicoSelect.addEventListener("change", atualizarSubtotal);
+        qtdInput.addEventListener("input", atualizarSubtotal);
+
+        // Atualiza automaticamente se houver valores carregados (ex: edição)
+        atualizarSubtotal();
+    });
+    </script>
+</div>
+{% endblock %}

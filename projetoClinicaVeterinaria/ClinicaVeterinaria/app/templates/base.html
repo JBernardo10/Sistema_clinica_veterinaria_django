@@ -1,0 +1,50 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css'%}">
+
+    <title>{%block titulo%} 
+    {%endblock%}</title>
+    
+
+    {%block estiloCss%}
+    {%endblock%}
+
+</head>
+<body>
+    <aside class="BarraLeteral">
+        <nav>
+            <ul id="ulBase">
+                <li class="liBase"><a class="aBase" href="{% url 'inicio' %}">INÍCIO</a></li>
+                <li class="liBase"><a class="aBase" href="{%url 'clinica'%}">CLÍNICAS</a></li>
+                <li class="liBase"><a class="aBase" href="{% url 'veterinario'%}">VETERINÁRIOS</a></li>
+                <li class="liBase"><a class="aBase" href="{% url 'cliente' %}">CLIENTES</a></li>
+                <li class="liBase"><a class="aBase" href="{%url 'pedido'%}">PEDIDOS</a></li>
+                <li class="liBase"><a class="aBase" href="{%url 'pagamento'%}">PAGAMENTOS</a></li>
+                <li class="liBase"><a class="aBase" href="{%url 'servico'%}">SERVIÇOS</a></li>
+                 <li class="liBase"><a class="aBase" href="{%url 'itemServico'%}">ITEM SERVIÇO</a></li>
+                <li class="liBase"><a class="aBase" href="{%url 'pet'%}">PETS</a></li>
+                <li class="liBase"><a class="aBase" href="{%url 'anexo'%}">ANEXO</a></li>
+                {% if user.is_authenticated %}
+                <li id="liBase">
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" id="sair">SAIR</button>
+                    </form>
+                </li>
+                {% endif %}
+                
+            </ul> 
+        </nav>
+    </aside>
+
+    <main class="conteudo">
+        {% block conteudo %}
+
+        {% endblock %}
+    </main>
+</body>
+</html>

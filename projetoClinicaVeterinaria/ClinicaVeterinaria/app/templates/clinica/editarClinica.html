@@ -1,0 +1,55 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block estiloCss%}
+<link rel="stylesheet" href="{%static 'css/padrao.css'%}">
+{%endblock%}
+
+{%block titulo%} 
+Editar Clinica
+{%endblock%}
+
+{%block conteudo%}
+<div class="cont">
+    <h1>EDITAR CLINICA</h1>
+
+     <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label>NOME</label>
+            {{formulario.nome}}
+        </div>
+
+        <div>
+            <label>CNPJ</label>
+            {{formulario.CNPJ}}
+        </div>
+
+        <div>
+            <label >ENDERECO</label>
+            {{formulario.endereco}}
+        </div>
+
+        <div>
+            <label>TELEFONE</label>
+            {{formulario.telefone}}
+        </div>
+        <div>
+            <label>LOGO</label><br>
+            {% if clinica.logo %}
+                <img src="{{ clinica.logo.url }}" alt="logo" width="150px" height="150px">
+            {% else %}
+                <p>Nenhuma imagem cadastrada.</p>
+            {% endif %}
+        </div>
+
+        <div style="margin-top:10px;">
+            <label>SUBSTITUIR IMAGEM</label>
+            {{ formulario.logo }}
+        </div>
+        <button type="submit">SALVAR</button>
+    </form>
+</div>
+
+
+{%endblock%}

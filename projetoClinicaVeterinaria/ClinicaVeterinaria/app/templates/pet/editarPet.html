@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block estiloCss %}
+<link rel="stylesheet" href="{% static 'css/padrao.css' %}">
+{% endblock %}
+
+{% block titulo %} 
+Editar Pet
+{% endblock %}
+
+{% block conteudo %}
+<div class="cont">
+    <h1>Editar Pet</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <label>NOME</label>
+            {{ formulario.nome }}
+        </div>
+        <div>
+            <label>TIPO</label>
+            {{ formulario.tipo }}
+        </div>
+        <div>
+            <label>RAÇA</label>
+            {{ formulario.raca }}
+        </div>
+        <div>
+            <label>DATA DE NASCIMENTO</label>
+            {{ formulario.dataNascimento }}
+        </div>
+        <div>
+            <label>SEXO</label>
+            {{ formulario.sexo }}
+        </div>
+        <div>
+            <label>DONO</label>
+            {{ formulario.idDono }}
+        </div>
+         <div>
+            <label>IMAGEM ATUAL</label><br>
+            {% if pet.imagemPet %}
+                <img src="{{ pet.imagemPet.url }}" alt="Imagem do pet" width="150px" height="150px">
+            {% else %}
+                <p>Nenhuma imagem cadastrada.</p>
+            {% endif %}
+        </div>
+
+        <div style="margin-top:10px;">
+            <label>SUBSTITUIR IMAGEM</label>
+            {{ formulario.imagemPet }}
+        </div>
+        <button type="submit">SALVAR</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block estiloCss %}
+<link rel="stylesheet" href="{% static 'css/padrao.css' %}">
+{% endblock %}
+
+{% block titulo %}
+Excluir Anexo
+{% endblock %}
+
+{% block conteudo %}
+<div class="cont">
+    <h1><strong>EXCLUIR ANEXO</strong></h1>
+    
+    <p>Deseja realmente excluir o Anexo nº <strong>{{ anexo.id }}</strong>?</p>
+
+    <div>
+        <p><strong>DURAÇÃO:</strong> {{ anexo.duracao }}</p>
+        <p><strong>INFORMAÇÕES:</strong> {{ anexo.informacoes }}</p>
+        <p><strong>SERVIÇO:</strong> {{ anexo.idServico }}</p>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Confirmar Exclusão</button>
+        <a class="btnA" href="{%url 'anexo'%}"> Cancelar</a>
+    </form>
+</div>
+{% endblock %}

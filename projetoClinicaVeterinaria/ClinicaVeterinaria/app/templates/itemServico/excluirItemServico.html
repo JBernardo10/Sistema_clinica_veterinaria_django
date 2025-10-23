@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block estiloCss %}
+<link rel="stylesheet" href="{% static 'css/padrao.css' %}">
+{% endblock %}
+
+{% block titulo %} 
+Excluir Item de Serviço
+{% endblock %}
+
+{% block conteudo %}
+<div class="cont">
+    <h1><strong>EXCLUIR ITEM DE SERVIÇO</strong></h1>
+    
+    <p>Deseja excluir o item de serviço com <strong>ID {{ item.id }}</strong>?</p>
+    <div>
+        <p><strong>ID:</strong> {{ item.id }}</p>
+        <p><strong>QUANTIDADE:</strong> {{ item.qtd }}</p>
+        <p><strong>SUBTOTAL:</strong> R$ {{ item.subTotal }}</p>
+        <p><strong>SERVIÇO:</strong> {{ item.idServico }} - {{ item.idServico.tipo }}</p>
+        <p><strong>PEDIDO:</strong> {{ item.idPedido }}</p>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Confirmar Exclusão</button>
+        <a class="btnA" href="{% url 'itemServico' %}">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
